@@ -324,8 +324,10 @@ start_redir() {
 		$sscmd -config /var/etc/v2-ssr-retcp.json >/dev/null 2>&1 &
 		echo "$(date "+%Y-%m-%d %H:%M:%S") $($sscmd -version | head -1) Started!" >>/tmp/ssrplus.log
 	elif [ "$stype" == "trojan" ]; then
+	for i in $(seq 1 $threads); do
 		$sscmd --config /var/etc/trojan-ssr-retcp.json >/dev/null 2>&1 &
-		echo "$(date "+%Y-%m-%d %H:%M:%S") $($sscmd --version 2>&1 | head -1) Started!" >>/tmp/ssrplus.log
+	done
+	echo "$(date "+%Y-%m-%d %H:%M:%S") $($sscmd --version 2>&1 | head -1) , $threads Threads Started!" >>/tmp/ssrplus.log
 	fi
 	if [ -n "$UDP_RELAY_SERVER" ]; then
 		redir_udp=1
@@ -365,7 +367,7 @@ start_redir() {
 		pdnsd_enable_flag=1
 	fi
 	if [ "$(uci_get_by_type global enable_switch)" == "1" ]; then
-		if [ "$(uci_get_by_name $GLOBAL_SERVER switch_enable)" == "1" ]; then
+		if [ "$(uci_get_by_name $GLOBAL_SERVER switch_enable 1)" == "1" ]; then
 			if [ -z "$switch_server" ]; then
 				local switch_time=$(uci_get_by_type global switch_time)
 				local switch_timeout=$(uci_get_by_type global switch_timeout)
