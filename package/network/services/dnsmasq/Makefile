@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dnsmasq
-PKG_VERSION:=2.80
-PKG_RELEASE:=12
+PKG_VERSION:=2.82
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://thekelleys.org.uk/dnsmasq
-PKG_HASH:=cdaba2785e92665cf090646cba6f94812760b9d7d8c8d0cfb07ac819377a63bb
+PKG_HASH:=84523646f3116bb5e1151efb66e645030f6e6a8256f29aab444777a343ebc132
 
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=COPYING
@@ -97,10 +97,10 @@ define Package/dnsmasq-full/config
 	config PACKAGE_dnsmasq_full_dhcpv6
 		bool "Build with DHCPv6 support."
 		depends on IPV6 && PACKAGE_dnsmasq_full_dhcp
-		default n
+		default y
 	config PACKAGE_dnsmasq_full_dnssec
 		bool "Build with DNSSEC support."
-		default n
+		default y
 	config PACKAGE_dnsmasq_full_auth
 		bool "Build with the facility to act as an authoritative DNS server."
 		default n
@@ -122,8 +122,8 @@ endef
 Package/dnsmasq-dhcpv6/conffiles = $(Package/dnsmasq/conffiles)
 Package/dnsmasq-full/conffiles = $(Package/dnsmasq/conffiles)
 
-TARGET_CFLAGS += -ffunction-sections -fdata-sections
-TARGET_LDFLAGS += -Wl,--gc-sections
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -flto=jobserver
 
 COPTS = -DHAVE_UBUS \
 	$(if $(CONFIG_IPV6),,-DNO_IPV6)

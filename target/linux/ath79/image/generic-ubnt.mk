@@ -34,7 +34,7 @@ define Device/ubnt
   DEVICE_PACKAGES := kmod-usb2
   IMAGES += factory.bin
   IMAGE/factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | \
-	append-rootfs | pad-rootfs | check-size $$$$(IMAGE_SIZE) | mkubntimage-split
+	append-rootfs | pad-rootfs | check-size | mkubntimage-split
 endef
 
 define Device/ubnt-bz
@@ -138,7 +138,7 @@ TARGET_DEVICES += ubnt_edgeswitch-5xp
 define Device/ubnt_edgeswitch-8xp
   $(Device/ubnt-sw)
   DEVICE_MODEL := EdgeSwitch 8XP
-  DEVICE_PACKAGES += switch-bcm53xx-mdio
+  DEVICE_PACKAGES += kmod-switch-bcm53xx-mdio
 endef
 TARGET_DEVICES += ubnt_edgeswitch-8xp
 
@@ -235,7 +235,7 @@ define Device/ubnt_routerstation_common
   IMAGE_SIZE := 16128k
   IMAGES := factory.bin
   IMAGE/factory.bin := append-rootfs | pad-rootfs | mkubntimage | \
-	check-size $$$$(IMAGE_SIZE)
+	check-size
   KERNEL := kernel-bin | append-dtb | lzma | pad-to $$(BLOCKSIZE)
   KERNEL_INITRAMFS := kernel-bin | append-dtb
 endef

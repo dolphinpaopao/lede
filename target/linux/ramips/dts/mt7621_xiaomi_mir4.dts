@@ -47,13 +47,13 @@
 			gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
 		};
+
 		minet {
 			label = "minet";
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_WPS_BUTTON>;
 		};
 	};
-
 };
 
 &nand {
