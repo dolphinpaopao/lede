@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=Argon Theme
-LUCI_DEPENDS:=
+LUCI_DEPENDS:=+luasocket
 PKG_VERSION:=1.6.9
 PKG_RELEASE:=20200821
 
