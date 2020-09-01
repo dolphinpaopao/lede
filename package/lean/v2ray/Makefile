@@ -72,6 +72,7 @@ define Package/$(PKG_NAME)
   URL:=https://www.v2ray.com
   SECTION:=net
   CATEGORY:=Network
+  SUBMENU:=Project V
   DEPENDS:=$(GO_ARCH_DEPENDS) +ca-certificates
 endef
 
