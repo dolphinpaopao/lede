@@ -34,6 +34,7 @@ define Package/libintl-full
   CATEGORY:=Libraries
   TITLE:=GNU Internationalization library
   URL:=http://www.gnu.org/software/gettext/
+  ABI_VERSION:=8
 endef
 
 TARGET_CFLAGS += $(FPIC)
@@ -94,7 +95,7 @@ endef
 
 define Package/libintl-full/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libintl.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libintl.so.* $(1)/usr/lib/
 endef
 
 $(eval $(call HostBuild))
