@@ -64,9 +64,6 @@ msgstr "加密方式"
 msgid "VLESS Encryption"
 msgstr "VLESS 加密"
 
-msgid "Flow"
-msgstr "流控 (Flow)"
-
 msgid "Transport"
 msgstr "传输协议"
 

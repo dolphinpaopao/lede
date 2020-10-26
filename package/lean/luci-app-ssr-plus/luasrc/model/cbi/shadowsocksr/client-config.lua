@@ -99,13 +99,6 @@ local securitys = {
 "chacha20-poly1305"
 }
 
-local flows = {
-"xtls-rprx-origin",
-"xtls-rprx-origin-udp443",
-"xtls-rprx-direct",
-"xtls-rprx-direct-udp443"
-}
-
 m = Map(shadowsocksr, translate("Edit ShadowSocksR Server"))
 m.redirect = luci.dispatcher.build_url("admin/services/shadowsocksr/servers")
 if m.uci:get(shadowsocksr, sid) ~= "servers" then
@@ -410,13 +403,6 @@ o = s:option(Flag, "xtls", translate("XTLS"))
 o.rmempty = true
 o.default = "0"
 o:depends({type="vless", tls="1"})
-
--- Flow
-o = s:option(Value, "vless_flow", translate("Flow"))
-for _, v in ipairs(flows) do o:value(v, v) end
-o.rmempty = true
-o.default = "xtls-rprx-origin"
-o:depends("xtls", "1")
 
 -- [[ Mux ]]--
 o = s:option(Flag, "mux", translate("Mux"))
